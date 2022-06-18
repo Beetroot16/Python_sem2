@@ -1,14 +1,15 @@
-# def palin(s,start,end):
-#     if start >= end:
-#         return True
-#     if s[start] == s[end]:
-#         return palin(s,start+1,end-1)
-#     else:
-#         return False
+def palin(s,start,end):
+    if start >= end:
+        print("is a palin")
+        return True
+    if s[start] == s[end]:
+        return palin(s,start+1,end-1)
+    else:
+        print("is not a palin")
+        return False
 
-
-# s = list(input("Enter the string: "))
-# print(palin(s,0,len(s)-1)) # 1 2 3 2 1 
+s = list(input("Enter the string: "))
+print(palin(s,0,len(s)-1))
 
 # num = list(map(int,input("Enter the numbers: ").split()))
 
@@ -17,6 +18,8 @@
 
 # print(list(even))
 # print(list(odd))
+
+
 
 # def fact(n):
 #     if n == 1:
