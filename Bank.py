@@ -1,15 +1,20 @@
 import random
+from cryptography.fernet import Fernet
+from rsa import encrypt
 
 names = []
 types = []
 accountnos = []
 balance = []
+passwords = []
+
 
 class account:
-    def __init__(self,name,account_number,account_type):
+    def __init__(self,name,account_number,account_type,password):
         self.name = name
         self.account_number = account_number
         self.account_type = account_type
+        self.password = password
 
 class savings:
     def __init__(self,balance,rate,time):
@@ -21,9 +26,24 @@ class current:
     def __init__(self,balance):
         self.balance = balance
 
+def password():
+    account.password = input("Set your account password: ")
+    checker = input("Re-type your password: ")
+    if checker == account.password:
+        key = Fernet.generate_key()
+        fernet = Fernet(key)
+        encrypted = fernet.encrypt(account.password.encode())
+        passwords.append(encrypted)
+        decoded = fernet.decrypt(encrypted).decode()
+        print(decoded)
+    else:
+        print("Passwords don't match !")
+        password()
+
 def add_user():
     account.name = input("Enter your name: ")
     names.append(account.name)
+    password()
     account.account_number = random.randint(1000000,9999999)
     accountnos.append(account.account_number)
     account.account_type = input("Enter your account type: ").lower()
